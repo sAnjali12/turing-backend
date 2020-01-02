@@ -4,8 +4,10 @@ var selectData = ()=>{
     return knex.select("*").from("department")
 }
 
-
-module.exports={selectData}
+var selectId = (id)=>{
+    return knex.select("*").from("department").where("department_id ", id)
+}
+module.exports={selectData, selectId }
 
 
 

@@ -14,4 +14,15 @@ department.get("/getData",(req,res)=>{
    })
 });
 
+department.get("/:id",(req,res)=>{
+    var id  = req.params.id
+    var data = departmentDb.selectId(id)
+   data.then((Response)=>{
+       res.json(Response)
+   }).catch((err)=>{
+       console.log(err)
+       res.send(err)
+   })
+});
+
 module.exports = department;
