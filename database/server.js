@@ -8,6 +8,9 @@ app.use("/department", department);
 const categories = require('./route/categories');
 app.use("/categories",categories)
 
+// For attribute.js file..
+const attributes = require('./route/attribute');
+app.use("/attributes",attributes)
   
 app.listen(5000,() =>{
     console.log("listining 5000....");
