@@ -25,4 +25,28 @@ categories.get("/:id",(req,res)=>{
    })
 });
 
+categories.get("/categories/inProduct/:product_id",(req,res)=>{
+    var id = req.params.product_id;
+    var data = categoriesDb.joinTable(id)
+    data.then((Response)=>{
+        res.send(Response)
+    }).catch((err)=>{
+        console.log(err)
+        res.send(err)
+    })
+    
+})
+
+categories.get("/categories/inDepartment/:department_id",(req,res)=>{
+    let department_id = req.params.department_id;
+    var data = categoriesDb.selectDepartment_id(department_id)
+    data.then((Response)=>{
+        res.send(Response)
+    }).catch((err)=>{
+        console.log(err)
+        res.send(err)
+    })
+})
+
+
 module.exports = categories;
