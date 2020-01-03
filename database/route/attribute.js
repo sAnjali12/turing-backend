@@ -14,9 +14,9 @@ attribute.get("/attribute",(req,res)=>{
    })
 });
 
-attribute.get("/:attribute_id",(req,res)=>{
+attribute.get("/attributes/values/:attribute_id",(req,res)=>{
     var attribute_id  = req.params.attribute_id
-    var data = attributeDb.select_attributeId(attribute_id)
+    var data = attributeDb.joinTable(attribute_id)
    data.then((Response)=>{
        res.json(Response)
    }).catch((err)=>{
@@ -24,5 +24,8 @@ attribute.get("/:attribute_id",(req,res)=>{
        res.send(err)
    })
 });
+
+
+
 
 module.exports = attribute
