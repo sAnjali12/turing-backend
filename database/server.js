@@ -15,8 +15,9 @@ app.use("/attributes",attributes)
 const taxs = require('./route/tax');
 app.use("/tax",taxs)
 
-
+const shippings = require('./route/shipping');
+app.use("/shipping",shippings)
   
 app.listen(5000,() =>{
     console.log("listining 5000....");
-});``
+});
