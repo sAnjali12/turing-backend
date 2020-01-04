@@ -39,6 +39,17 @@ product.get("/products/inCategory/:category_id",(req,res)=>{
 });
 
 
+product.get("/products/inDepartment/:department_id",(req,res)=>{
+    var department_id  = req.params.department_id
+    var data =productDb.join_departmenttable(department_id)
+   data.then((Response)=>{
+       res.send(Response)
+   }).catch((err)=>{
+       console.log(err)
+       res.send(err)
+   })
+});
+
 
 
 module.exports = product;

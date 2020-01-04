@@ -12,4 +12,10 @@ var join_categorytable = (category_id )=>{
     return knex.select(" product.product_id", "product.name", "product.description", "product.price", "product.discounted_price" , "product.thumbnail").from("product").innerJoin('category',"product.product_id", "category.category_id").where("category_id",category_id)
     
 }
-module.exports = {selectData, select_productId ,join_categorytable}
+
+var join_departmenttable = (department_id)=>{
+    return knex.select(" product.product_id", "product.name", "product.description", "product.price", "product.discounted_price" , "product.thumbnail").from("product").innerJoin('department',"product.product_id", "department.department_id").where("department_id",department_id)
+    
+}
+
+module.exports = {selectData, select_productId ,join_departmenttable}
