@@ -13,9 +13,10 @@ var joinTable = (attribute_id)=>{
     
 }
 
-var produtjoinTable = (attribute_id)=>{
-    return knex.select( "attribute_value.attribute_value_id", "attribute_value.attribute_name", "attribute_value.value").from('attribute_value').innerJoin('product', 'attribute_value.attribute_id', 'product.attribute_id').where("attribute_value.attribute_id",attribute_id)
-    
+var multepleTable = (product_id)=>{
+    return knex.select('attribute_value.attribute_value_id','attribute_value.value','attribute.name').from('product_attribute').innerJoin('attribute_value').innerJoin('attribute').where('product_id',product_id)
 }
+    
 
-module.exports = {selectData, select_attributeId, joinTable}
+
+module.exports = {selectData, select_attributeId, joinTable,  multepleTable}
