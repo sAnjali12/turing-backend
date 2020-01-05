@@ -32,5 +32,8 @@ var join_categorytableLocations = (product_id )=>{
     return knex.select("category.name","department.department_id","category.category_id", "department.name").from('product').innerJoin('department').innerJoin('category').where('product_id',product_id)
 }
 
+var insertdata_review = (reviews)=>{
+    return knex('review').insert(reviews)
+}
 
-module.exports = {selectData, select_productId, select_productName, join_categorytable , join_departmenttable, productDetail, join_categorytableLocations}
+module.exports = {selectData, select_productId, select_productName, join_categorytable , join_departmenttable, productDetail, join_categorytableLocations, insertdata_review }

@@ -84,7 +84,20 @@ product.get("/products/:product_id/locations",(req,res)=>{
    })
 });
 
-product.post("/products/:product_id/reviews")
+product.post("/products/:product_id/reviews",(req,res)=>{
+    let reviews = {
+        "customer_id": req.body.customer_id,
+        "review": req.body.review,
+        "rating": req.body.rating,
+        "created_on": req.body.created_on 
+    }
+    reviews["product_id"] = req.params.product_id
+    productDb.insertdata_review(reviews).then((data)=>{
+        return res.send({ success: true, message: 'ok' })
+       }).catch((err)=>{
+        console.log(err);
+    })
+})
 
 
 
