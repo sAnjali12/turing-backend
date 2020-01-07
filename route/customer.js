@@ -31,7 +31,15 @@ customer.post("/customers",(req,res)=>{
     })
 });
 
-
+customer.get("/customer",(req,res)=>{
+    var data = customerDb.selectData()
+    data.then((Response)=>{
+       res.json(Response)
+   }).catch((err)=>{
+       console.log(err)
+       res.send(err)
+   })
+})
 
 
 module.exports = customer 
