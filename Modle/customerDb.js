@@ -13,6 +13,10 @@ var updateData = (update,user_id)=>{
    return knex.select("*").from("customer").where("customer_id ",user_id).update(update);
 }
 
-module.exports = {insertData, selectData, updateData
+var user_login = ()=>{
+   return knex.select("*").from("customer")
+}
+
+module.exports = {insertData, selectData, updateData, user_login
 
 }
