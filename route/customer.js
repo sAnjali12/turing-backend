@@ -41,5 +41,21 @@ customer.get("/customer",(req,res)=>{
    })
 })
 
+customer.put("/customer/update/:id",function(req,res){
+   var user_id = req.params.id;
+   var update = {"name": req.body.name,
+                "email": req.body.email,
+                "password":req.body.password,
+                "day_phone": req.body.day_phone,
+                "eve_phone": req.body.eve_phone,
+                "mob_phone": req.body.mob_phone,}
+   var data = customerDb.updateData(update,user_id)
+    data.then((Response)=>{
+        res.json("updated")
+    }).catch((err)=>{
+        console.log(err);
+    })
+});
+
 
 module.exports = customer 
