@@ -1,6 +1,7 @@
 const express = require('express');
 const customer = express.Router();
 const customerDb = require("../Modle/customerDb");
+const jwt = require('jsonwebtoken')
 customer.use(express.json())
 
 
@@ -56,6 +57,25 @@ customer.put("/customer/update/:id",function(req,res){
         console.log(err);
     })
 });
+
+customer.post("/login",(req,res)=>{
+    var email  = req.body.email
+    var password = req.body.password;
+    var data = customerDb.user_login()
+    data.then((Response)=>{
+        for(index in Response){
+            if(Response[index]["email"]==email && Response[index]["password"]==password){
+                let token = jwt.sign({"user":Response},"Anjalis")
+                res.cookie(token)
+           }
+      }
+    }).catch((err)=>{
+        res.send(err);
+    })
+
+ 
+
+})
 
 
 module.exports = customer 
