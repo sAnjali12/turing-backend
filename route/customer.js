@@ -67,15 +67,59 @@ customer.post("/login",(req,res)=>{
             if(Response[index]["email"]==email && Response[index]["password"]==password){
                 let token = jwt.sign({"user":Response},"Anjalis")
                 res.cookie(token)
+                res.send("Rigth... ")
            }
       }
     }).catch((err)=>{
         res.send(err);
     })
-
- 
-
 })
 
+customer.put("/customers/address",(req,res)=>{
+    let jwtData = req.headers.cookie
+    let tokenSplit = jwtData.split("=undefined")
+    let token = tokenSplit[tokenSplit.length-2]
+    var customer_id = req.body.customer_id
+    jwt.verify(token, "Anjalis",(err, data)=>{
+        customerDetail = {
+            "address_1": req.body.address_1,
+            "address_2": req.body.address_2,
+            "customer_id": customer_id,
+            "city": req.body.city ,
+            "region": req.body.region,
+            "postal_code": req.body.postal_code,
+            "country": req.body.country,
+            "shipping_region_id": req.body.shipping_region_id
+        }
+        var data = customerDb.putcustomerAddress(customerDetail,customer_id)
+        data.then((Response)=>{
+            res.send("Data Updated......")
+        }).catch((err)=>{
+            res.send(err);
+        })
+    
+    })
+    
+})
+
+
+customer.put("/customers/Credit_card",(req,res)=>{
+    let jwtData = req.headers.cookie
+    let tokenSplit = jwtData.split("=undefined")
+    let token = tokenSplit[tokenSplit.length-2]
+    var customer_id = req.body.customer_id
+    jwt.verify(token, "Anjalis",(err, data)=>{
+        var updateCredit_card = {"credit_card": req.body.Credit_card,
+                                  "customer_id": customer_id}
+        var data = customerDb.putcustomerCredit_card(updateCredit_card,customer_id)
+        data.then((Response)=>{
+            res.send("Data Updated......")
+        }).catch((err)=>{
+            res.send(err);
+        })
+    
+    })
+    
+})
 
 module.exports = customer 
