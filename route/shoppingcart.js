@@ -80,7 +80,24 @@ shoppingcart.delete("/shoppingcart/empty/:cart_id",(req,res)=>{
     })
 })
 
+shoppingcart.get("/shoppingcart/totalAmount/:cart_id",(req,res)=>{
+    var cart_id = req.params.cart_id
+    var data = shoppingcartDb.joinProduct(cart_id)
+    data.then((Response)=>{
+        let price = Response[0]["price"]
+        let quantity = Response[0]["quantity"]
+        var subtotal =  price*quantity
 
+        var totalAmount = {
+            "totalAmount" : subtotal
+        } 
+        res.send(totalAmount)
+    }).catch((err)=>{
+        res.send(err)
+    })
+
+
+})
 
 module.exports = shoppingcart;
 
