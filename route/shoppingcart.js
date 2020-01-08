@@ -119,6 +119,18 @@ shoppingcart.get("/shoppingcart/saveForLater/:item_id",(req,res)=>{
     })
 })
 
+shoppingcart.get("/shoppingcart/getSaved/:cart_id",(req,res)=>{
+    var cart_id = req.params.cart_id
+    var data = shoppingcartDb.getSaved(cart_id)
+    data.then((Response)=>{
+        res.json(Response)
+    }).catch((err)=>{
+        console.log(err)
+        res.send(err)
+    })
+})
+
+
 module.exports = shoppingcart;
 
 
