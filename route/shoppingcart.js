@@ -46,6 +46,28 @@ shoppingcart.get("/shoppingcart/:cart_id",(req,res)=>{
     })
 })
 
+shoppingcart.put("/shoppingcart/update/:item_id",(req,res)=>{
+    var item_id = req.params.item_id
+    var data = shoppingcartDb.joinProduct(item_id)
+    data.then((Response)=>{
+        let price = Response[0]["price"]
+        let quantity = Response[0]["quantity"]
+        var subtotal =  price*quantity
+        var data = {
+            "item_id": Response[0]["item_id"] ,
+            "name": Response[0]["name"],
+            "attributes":Response[0]["attributes"],
+            "product_id": Response[0]["product_id"],
+            "price": Response[0]["price"],
+            "quantity":Response[0]["quantity"],
+            "subtotal": subtotal
+          }
+        res.send(data)
+    }).catch((err)=>{
+        console.log(err)
+        res.send(err)
+    })
+})
 
 module.exports = shoppingcart;
 
