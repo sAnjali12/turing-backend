@@ -39,4 +39,9 @@ var deleteDatabyitem_id = (item_id)=>{
     return knex.select("*").from("shopping_cart ").where("item_id", item_id).del()
 }
 
-module.exports = {selectData, insertData, selectby_id, joinProduct, deleteData,totalAmount,selectbyitem_id, insertData_saveForLater, deleteDatabyitem_id}
+var getSaved = (cart_id)=>{
+    return knex.select("shopping_cart.item_id", "shopping_cart.attributes", "product.price", "product.name" ).from("shopping_cart").innerJoin("product", "shopping_cart.product_id", "product.product_id").where("shopping_cart.cart_id", cart_id)
+}
+
+
+module.exports = {selectData, insertData, selectby_id, joinProduct, deleteData,totalAmount,selectbyitem_id, insertData_saveForLater, deleteDatabyitem_id, getSaved}
