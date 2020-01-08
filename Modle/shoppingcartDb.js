@@ -44,4 +44,8 @@ var getSaved = (cart_id)=>{
 }
 
 
-module.exports = {selectData, insertData, selectby_id, joinProduct, deleteData,totalAmount,selectbyitem_id, insertData_saveForLater, deleteDatabyitem_id, getSaved}
+var removeDatabyitem_id = (item_id)=>{
+    return knex.select("*").from("shopping_cart ").where("item_id", item_id).del()
+}
+
+module.exports = {selectData, insertData, selectby_id, joinProduct, deleteData,totalAmount,selectbyitem_id, insertData_saveForLater, deleteDatabyitem_id, getSaved, removeDatabyitem_id}
