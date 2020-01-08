@@ -35,6 +35,17 @@ shoppingcart.post("/shoppingcart/add",(req,res)=>{
     });
 
 
+shoppingcart.get("/shoppingcart/:cart_id",(req,res)=>{
+    var cart_id = req.params.cart_id
+    var data = shoppingcartDb.selectby_id(cart_id)
+    data.then((Response)=>{
+        res.json(Response)
+    }).catch((err)=>{
+        console.log(err)
+        res.send(err)
+    })
+})
+
 
 module.exports = shoppingcart;
 
