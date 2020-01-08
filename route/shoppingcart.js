@@ -99,6 +99,26 @@ shoppingcart.get("/shoppingcart/totalAmount/:cart_id",(req,res)=>{
 
 })
 
+
+shoppingcart.get("/shoppingcart/saveForLater/:item_id",(req,res)=>{
+    var item_id = req.params.item_id
+    var data = shoppingcartDb.selectbyitem_id(item_id)
+    data.then((Response)=>{
+        var insertData = shoppingcartDb.insertData_saveForLater(Response)
+        insertData.then((resps)=>{
+           var deleteData = shoppingcartDb.deleteDatabyitem_id(item_id)
+           deleteData.then((resp)=>{
+               res.send("Deleted.....")
+           }).catch((err)=>{
+            console.log(err)
+        })
+        })
+        
+    }).catch((err)=>{
+        res.send(err)
+    })
+})
+
 module.exports = shoppingcart;
 
 
