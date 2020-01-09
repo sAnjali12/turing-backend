@@ -13,8 +13,11 @@ var orderDetail  = (order_id)=>{
     return knex.select("orders.order_id","orders.total_amount", "orders.created_on", "orders.shipped_on", "orders.status", "product.name").from("orders").innerJoin("product", "orders.order_id", "product.product_id").where("orders.order_id", order_id)
 }
 
+var selectData = ()=>{
+    return knex.select("*").from("orders")
+}
 
-module.exports = {getWithJoin, insertData,orderDetail}
+module.exports = {getWithJoin, insertData,orderDetail, selectData}
 
 
 
