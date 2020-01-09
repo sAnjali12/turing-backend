@@ -35,16 +35,38 @@ orders.post("/:cart_id",(req,res)=>{
 })
 
 
+
+orders.get("/orders/:order_id",(req,res)=>{
+    var data = orderDb.selectData()
+    data.then((Response)=>{
+       res.json(Response)
+   }).catch((err)=>{
+       console.log(err)
+       res.send(err)
+   })
+})
+
+
 orders.get("/orders/shortDetail/:order_id",(req,res)=>{
     var order_id = req.params.order_id
-    var data = orderDb.orderDetail(order_id)
+    var data = orderDb.for_orderDetailGet(order_id)
     data.then((resp)=>{
-        res.send(resp)
+        var orderDetailData = {
+            "order_id": resp[0]["order_id"],
+            "product_id": resp[0]["product_id"],
+            "attributes": resp[0]["attributes"],
+            "product_name": resp[0]["name"],
+            "quantity": resp[0]["quantity"],
+            "unit_cost": resp[0]["price"]
+        }
+        var insertData = orderDb.in_orderDetailInsert(orderDetailData)
+        insertData.then((inserte)=>{
+            res.send("Data Inserted..")
+        })
     }).catch((err)=>{
         res.send(err)
     })
 })
-
 
 orders.get("/orders/inCustomer",(req,res)=>{
     var data = orderDb.selectData()
