@@ -17,7 +17,15 @@ var selectData = ()=>{
     return knex.select("*").from("orders")
 }
 
-module.exports = {getWithJoin, insertData,orderDetail, selectData}
+var for_orderDetailGet = (order_id)=>{
+    return knex.select("shopping_cart. quantity", "shopping_cart.product_id", "shopping_cart.attributes", "shopping_cart.quantity", "orders.order_id", "product.name","product.price").from("orders").innerJoin("product", "orders.order_id", "product.product_id").innerJoin("shopping_cart").where("orders.order_id",order_id)
+}
+
+var in_orderDetailInsert = (orderDetailData)=>{
+    return knex("order_detail").insert(orderDetailData)
+}
+
+module.exports = {getWithJoin, insertData,orderDetail, selectData, for_orderDetailGet, in_orderDetailInsert}
 
 
 
