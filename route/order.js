@@ -13,7 +13,7 @@ orders.post("/:cart_id",(req,res)=>{
         let price = Response[0]["price"]
         let quantity = Response[0]["quantity"]
         var subtotal =  price*quantity
-        var orderDetail = {
+        var orders = {
             "total_amount": subtotal,
             "created_on": new Date(),
             "shipped_on": new Date(),
@@ -25,16 +25,28 @@ orders.post("/:cart_id",(req,res)=>{
             "shipping_id": req.body.shipping_id,
             "tax_id": req.body.tax_id 
         }
-        var insertData = orderDb.insertData(orderDetail)
+        var insertData = orderDb.insertData(orders)
         insertData.then((resp)=>{
             res.send("Data inserted...")
         })
     }).catch((err)=>{
         res.send(err)
     })
-
-
 })
+
+
+orders.get("/orders/shortDetail/:order_id",(req,res)=>{
+    var order_id = req.params.order_id
+    var data = orderDb.orderDetail(order_id)
+    data.then((resp)=>{
+        res.send(resp)
+    }).catch((err)=>{
+        res.send(err)
+    })
+})
+
+  
+
 
 module.exports = orders
 
