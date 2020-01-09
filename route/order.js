@@ -45,6 +45,17 @@ orders.get("/orders/shortDetail/:order_id",(req,res)=>{
     })
 })
 
+
+orders.get("/orders/inCustomer",(req,res)=>{
+    var data = orderDb.selectData()
+    data.then((Response)=>{
+       res.json(Response)
+   }).catch((err)=>{
+       console.log(err)
+       res.send(err)
+   })
+})
+
   
 
 
