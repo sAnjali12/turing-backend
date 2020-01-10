@@ -4,7 +4,7 @@ var selectData = ()=>{
     return knex.select("*").from("category")
 }
 
-var select_categoryId = (id)=>{
+var selectCategoryId = (id)=>{
     return knex.select("*").from("category").where("category_id ", id)
 }
 
@@ -14,8 +14,10 @@ var joinTable = (id)=>{
     
 }
 
-var selectDepartment_id = (department_id)=>{
+var selectDepartmentid = (department_id)=>{
     return knex.select("*").from("category").where("department_id", department_id)
 }
 
-module.exports = {selectData, select_categoryId, joinTable,selectDepartment_id}
+
+
+module.exports = {selectData, selectCategoryId, joinTable,selectDepartmentid}

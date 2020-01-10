@@ -4,7 +4,7 @@ var selectData = ()=>{
     return knex.select("*").from("attribute")
 }
 
-var select_attributeId = (attribute_id)=>{
+var selectAttributeId = (attribute_id)=>{
     return knex.select("*").from("attribute").where("attribute_id ", attribute_id)
 }
 
@@ -19,4 +19,4 @@ var multepleTable = (product_id)=>{
     
 
 
-module.exports = {selectData, select_attributeId, joinTable,  multepleTable}
+module.exports = {selectData, selectAttributeId, joinTable,  multepleTable}
