@@ -16,7 +16,7 @@ attribute.get("/attribute",(req,res)=>{
 
 attribute.get("/attributes/:attribute_id",(req,res)=>{
     var id  = req.params.id
-    var data = attributeDb.select_attributeId(id)
+    var data = attributeDb.selectAttributeId(id)
    data.then((Response)=>{
        res.json(Response)
    }).catch((err)=>{

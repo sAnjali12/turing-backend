@@ -111,7 +111,7 @@ customer.put("/customers/Credit_card",(req,res)=>{
     jwt.verify(token, "Anjalis",(err, data)=>{
         var updateCredit_card = {"credit_card": req.body.Credit_card,
                                   "customer_id": customer_id}
-        var data = customerDb.putcustomerCredit_card(updateCredit_card,customer_id)
+        var data = customerDb.putcustomerCreditcard(updateCredit_card,customer_id)
         data.then((Response)=>{
             res.send("Data Updated......")
         }).catch((err)=>{

@@ -49,7 +49,7 @@ orders.get("/orders/:order_id",(req,res)=>{
 
 orders.get("/orders/shortDetail/:order_id",(req,res)=>{
     var order_id = req.params.order_id
-    var data = orderDb.for_orderDetailGet(order_id)
+    var data = orderDb.forOrderDetailGet(order_id)
     data.then((resp)=>{
         var orderDetailData = {
             "order_id": resp[0]["order_id"],
@@ -59,7 +59,7 @@ orders.get("/orders/shortDetail/:order_id",(req,res)=>{
             "quantity": resp[0]["quantity"],
             "unit_cost": resp[0]["price"]
         }
-        var insertData = orderDb.in_orderDetailInsert(orderDetailData)
+        var insertData = orderDb.inOrderDetailInsert(orderDetailData)
         insertData.then((inserte)=>{
             res.send("Data Inserted..")
         })

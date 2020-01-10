@@ -104,9 +104,9 @@ shoppingcart.get("/shoppingcart/saveForLater/:item_id",(req,res)=>{
     var item_id = req.params.item_id
     var data = shoppingcartDb.selectbyitem_id(item_id)
     data.then((Response)=>{
-        var insertData = shoppingcartDb.insertData_saveForLater(Response)
+        var insertData = shoppingcartDb.insertDatasaveForLater(Response)
         insertData.then((resps)=>{
-           var deleteData = shoppingcartDb.deleteDatabyitem_id(item_id)
+           var deleteData = shoppingcartDb.deleteDatabyitemId(item_id)
            deleteData.then((resp)=>{
                res.send("Deleted.....")
            }).catch((err)=>{
@@ -118,6 +118,26 @@ shoppingcart.get("/shoppingcart/saveForLater/:item_id",(req,res)=>{
         res.send(err)
     })
 })
+
+shoppingcart.get("/shoppingcart/moveToCart/:item_id",(req,res)=>{
+    var item_id = req.params.item_id
+    var data = shoppingcartDb.movecartbyitem_id(item_id)
+    data.then((Response)=>{
+        var insertData = shoppingcartDb.insertDataMovecart(Response)
+        insertData.then((resps)=>{
+           var deleteData = shoppingcartDb.deleteDataFromSaveForLater(item_id)
+           deleteData.then((resp)=>{
+               res.send("Deleted.....")
+           }).catch((err)=>{
+            console.log(err)
+        })
+        })
+        
+    }).catch((err)=>{
+        res.send(err)
+    })
+})
+
 
 shoppingcart.get("/shoppingcart/getSaved/:cart_id",(req,res)=>{
     var cart_id = req.params.cart_id
@@ -133,7 +153,7 @@ shoppingcart.get("/shoppingcart/getSaved/:cart_id",(req,res)=>{
 
 shoppingcart.delete("/shoppingcart/removeProduct/:item_id",(req,res)=>{
     var item_id = req.params.item_id
-    var data = shoppingcartDb.removeDatabyitem_id(item_id)
+    var data = shoppingcartDb.removeDatabyitemId(item_id)
     data.then((Response)=>{
         res.json("Data Deleted.....")
     }).catch((err)=>{

@@ -17,7 +17,7 @@ product.get("/products",(req,res)=>{
 
 product.get("/products/:product_id/",(req,res)=>{
     var product_id  = req.params.product_id
-    var data =productDb.select_productId(product_id)
+    var data =productDb.selectProductId(product_id)
    data.then((Response)=>{
        res.send(Response)
    }).catch((err)=>{
@@ -31,7 +31,7 @@ product.get("/products/search/:limit/:product_name/:length",(req,res)=>{
     var product_name = req.params.product_name
     var limit = req.params.limit
     var description_length = req.params.length
-    var data =productDb.select_productName(product_name, limit)
+    var data =productDb.selectProductName(product_name, limit)
     data.then((Response)=>{
         var description = Response[0]['description']
         var sort_description = description.slice(0,description_length);
@@ -88,7 +88,7 @@ product.get("/products/:product_id/details",(req,res)=>{
 
 product.get("/products/:product_id/locations",(req,res)=>{
     var product_id  = req.params.product_id
-    var data =productDb.join_categorytableLocations(product_id)
+    var data =productDb.joinCategorytableLocations(product_id)
    data.then((Response)=>{
        res.send(Response)
    }).catch((err)=>{
@@ -112,6 +112,15 @@ product.post("/products/:product_id/reviews",(req,res)=>{
     })
 })
 
+product.get("/products/:product_id/reviews",(req,res)=>{
+    var product_id  = req.params.product_id
+    var data =productDb.join_reviewtable(product_id)
+   data.then((Response)=>{
+       res.send(Response)
+   }).catch((err)=>{
+       res.send(err)
+   })
+});
 
 
 

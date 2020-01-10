@@ -16,7 +16,7 @@ shipping.get("/shippingData",(req,res)=>{
 
 shipping.get("/shipping/:shipping_id",(req,res)=>{
     var shipping_id  = req.params.shipping_id
-    var data = shippingDb.select_shippingId (shipping_id)
+    var data = shippingDb.selectShippingId (shipping_id)
    data.then((Response)=>{
        res.json(Response)
    }).catch((err)=>{

@@ -16,7 +16,7 @@ categories.get("/getData",(req,res)=>{
 
 categories.get("/:id",(req,res)=>{
     var id  = req.params.id
-    var data = categoriesDb.select_categoryId(id)
+    var data = categoriesDb.selectCategoryId(id)
    data.then((Response)=>{
        res.json(Response)
    }).catch((err)=>{
@@ -39,7 +39,7 @@ categories.get("/categories/inProduct/:product_id",(req,res)=>{
 
 categories.get("/categories/inDepartment/:department_id",(req,res)=>{
     let department_id = req.params.department_id;
-    var data = categoriesDb.selectDepartment_id(department_id)
+    var data = categoriesDb.selectDepartmentid(department_id)
     data.then((Response)=>{
         res.send(Response)
     }).catch((err)=>{
